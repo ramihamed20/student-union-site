@@ -24,10 +24,12 @@
   --white: #fff;
   --shell: min(1100px, 100% - 48px);
   --dock-gap: max(12px, env(safe-area-inset-bottom));
+  --dock-height: 82px;
+  --dock-clearance: calc(var(--dock-height) + var(--dock-gap) + 12px);
   --ease-out: cubic-bezier(.2, .75, .25, 1);
 }
 * { box-sizing: border-box; }
-body { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; height: 100dvh; margin: 0; background: var(--surface); color: var(--ink); font: 1rem/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif; }
+body { display: grid; grid-template-rows: auto minmax(0, 1fr); height: 100vh; height: 100dvh; margin: 0; background: var(--surface); color: var(--ink); font: 1rem/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif; }
 [hidden] { display: none !important; }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -51,7 +53,7 @@ a { color: var(--blue); }
 .icon-button .glyph { width: 19px; height: 19px; }
 .notify-button { color: var(--deep); border-color: #dee6f6; background: #fff9; }
 .notify-button:hover { background: #eaf0ff; }
-.page-frame { min-width: 0; min-height: 0; overflow: auto; overflow-x: hidden; padding: 24px 0 22px; }
+.page-frame { min-width: 0; min-height: 0; overflow: auto; overflow-x: hidden; padding: 24px 0 var(--dock-clearance); scroll-padding-bottom: var(--dock-clearance); }
 .page-frame > section { width: var(--shell); margin-inline: auto; }
 .page-frame[data-turn="left"] { --page-shift: -10px; }
 .page-frame[data-turn="right"] { --page-shift: 10px; }
@@ -110,10 +112,17 @@ h1, h2, h3, p { margin: 0; }
 .heart-count { min-width: 24px; text-align: center; border-radius: 15px; background: #eff2f8; padding-inline: 4px; }
 .heart-button[aria-pressed="true"] .heart-symbol { animation: heart-pop 280ms var(--ease-out); }
 @keyframes heart-pop { 45% { transform: scale(1.22); } }
+.dock-frost {
+  position: fixed; z-index: 4; inset: auto 0 0; height: var(--dock-clearance); pointer-events: none;
+  background: linear-gradient(transparent, #f5f7fb82 64%, #f5f7fbe0);
+  -webkit-mask-image: linear-gradient(transparent, #000 32px);
+  mask-image: linear-gradient(transparent, #000 32px);
+  -webkit-backdrop-filter: blur(11px); backdrop-filter: blur(11px);
+}
 .dock {
   --dock-blue: #173dbd;
   --dock-motion: 320ms cubic-bezier(.25, .78, .25, 1);
-  position: relative; z-index: 5; width: min(calc(100% - 22px), 510px); margin-inline: auto;
+  position: fixed; z-index: 5; inset: auto 0 0; width: min(calc(100% - 22px), 510px); margin-inline: auto;
   padding: 0 20px var(--dock-gap); color: #e6edff; isolation: isolate; pointer-events: none;
 }
 .dock::before {
@@ -133,7 +142,7 @@ h1, h2, h3, p { margin: 0; }
   background: linear-gradient(150deg, #295ffd, #102b9c); box-shadow: 0 3px 14px #05207090;
 }
 .dock-link {
-  display: grid; justify-items: center; align-content: end; gap: 2px; min-height: 82px; padding-bottom: 6px;
+  display: grid; justify-items: center; align-content: end; gap: 2px; min-height: var(--dock-height); padding-bottom: 6px;
   color: inherit; border-radius: 13px; text-decoration: none; font-size: .68rem; font-weight: 700; line-height: 18px; pointer-events: auto;
   transition: color 170ms;
 }
@@ -299,6 +308,7 @@ body:has(dialog[open]) { overflow: hidden; }
   </section>
 </main>
 
+<div class="dock-frost" aria-hidden="true"></div>
 <nav class="dock" aria-label="التنقل الرئيسي">
   <div class="dock-links">
     <span class="dock-indicator" aria-hidden="true">
