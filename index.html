@@ -228,7 +228,7 @@ body:has(dialog[open]) { overflow: hidden; }
         <img class="profile-avatar" data-profile-avatar src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J2cnIHgxPScwJyB5MT0nMCcgeDI9JzEnIHkyPScxJz48c3RvcCBzdG9wLWNvbG9yPScjMGQ1MGRmJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMDYzNmI1Jy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzIwMCcgaGVpZ2h0PScyMDAnIHJ4PSc0MCcgZmlsbD0ndXJsKCNnKScvPjxjaXJjbGUgY3g9JzEwMCcgY3k9Jzc0JyByPSczMicgZmlsbD0nI2ZmZicgb3BhY2l0eT0nLjkyJy8+PHBhdGggZD0nTTQ4IDE2NWMwLTMxIDI0LTUxIDUyLTUxaDAgYzI4IDAgNTIgMjAgNTIgNTEnIGZpbGw9JyNmZmYnIG9wYWNpdHk9Jy45MicvPjwvc3ZnPg==" alt="صورة الملف الشخصي" width="90" height="90">
         <div class="profile-meta">
           <h1 id="profile-name" data-profile-name>محمد علي</h1>
-          <p id="profile-role">عضو اللجنة الإعلامية</p>
+          <p id="profile-role">عضو اللجنة العلمية لطب الأسنان</p>
           <p id="profile-year">السنة الثالثة</p>
           <div class="rating" aria-label="التقييم 4.8 من 5 نجوم"><span class="rating-stars" aria-hidden="true">★★★★★</span><span aria-hidden="true">4.8 / 5</span></div>
         </div>
@@ -246,15 +246,18 @@ body:has(dialog[open]) { overflow: hidden; }
         <dl class="detail-list">
           <div><dt>الكلية</dt><dd>كلية طب الأسنان</dd></div>
           <div><dt>التخصص</dt><dd>طب وجراحة الفم والأسنان</dd></div>
+          <div><dt>السنة الدراسية</dt><dd id="profile-detail-year"></dd></div>
+          <div><dt>الصفة في الاتحاد</dt><dd id="profile-detail-role"></dd></div>
+          <div><dt>الاهتمامات الدراسية</dt><dd>تشريح الأسنان، مواد الأسنان، والتدريب قبل السريري</dd></div>
           <div><dt>رقم العضوية</dt><dd><bdi>SU-2026-148</bdi></dd></div>
           <div><dt>البريد الجامعي</dt><dd><bdi>m.ali@students.edu</bdi></dd></div>
         </dl>
       </section>
       <section class="profile-panel" id="cv-panel" role="tabpanel" aria-labelledby="cv-tab" tabindex="0" hidden>
         <dl class="detail-list cv-list">
-          <div><dt>نبذة</dt><dd>طالب نشط في الأنشطة الطلابية ويعمل على تنظيم الفعاليات الإعلامية داخل الاتحاد.</dd></div>
-          <div><dt>الخبرات</dt><dd>تنسيق الحملات الطلابية، إدارة صفحات التواصل، وتنظيم الفعاليات الجامعية.</dd></div>
-          <div><dt>المهارات</dt><dd>التصميم، كتابة المحتوى، التقديم، والعمل ضمن الفريق.</dd></div>
+          <div><dt>نبذة</dt><dd>طالب طب أسنان مهتم بتشريح الأسنان وتطبيقاته في المعمل، ويشارك في أنشطة اللجنة العلمية للاتحاد.</dd></div>
+          <div><dt>التدريب العملي</dt><dd>التعرّف على أسطح الأسنان وحدباتها، ونحت نماذج الأسنان بالشمع ضمن التدريب قبل السريري.</dd></div>
+          <div><dt>الأنشطة الطلابية</dt><dd>إعداد ملخصات لمواد طب الأسنان وتنظيم جلسات مراجعة جماعية قبل الاختبارات العملية.</dd></div>
         </dl>
       </section>
     </div>
@@ -519,6 +522,8 @@ body:has(dialog[open]) { overflow: hidden; }
     for (const author of authors) author.textContent = profile.name;
     identityFields.role.textContent = profile.role;
     identityFields.year.textContent = profile.year;
+    byId('profile-detail-role').textContent = profile.role;
+    byId('profile-detail-year').textContent = profile.year;
     for (const avatar of avatars) avatar.src = profile.avatar;
   }
 
