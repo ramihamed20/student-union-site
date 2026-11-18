@@ -1,7 +1,7 @@
 'use strict';
 
 const cachePrefix = 'student-union-site-shell-';
-const cacheName = cachePrefix + 'v3';
+const cacheName = cachePrefix + 'v4';
 const scope = new URL(self.registration.scope);
 const indexUrl = new URL('index.html', scope).href;
 const shellUrls = [
